@@ -34,6 +34,7 @@ module.exports = (env) => {
                 'toastr',
                 'toastr/build/toastr.css',
                 'zone.js',
+                './ClientApp/styles.css'
             ]
         },
         output: {

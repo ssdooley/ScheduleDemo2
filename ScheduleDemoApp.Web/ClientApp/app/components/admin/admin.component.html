@@ -1,0 +1,11 @@
+﻿<h2>Admin</h2>
+<hr />
+<ul class="nav nav-pills nav-justified">
+    <li role="presentation" routerLinkActive="active"><a routerLink="/admin/people" role="tab" data-toggle="tab">People</a></li>
+    <li role="presentation" routerLinkActive="active"><a routerLink="/admin/categories" role="tab" data-toggle="tab">Categories</a></li>
+</ul>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+﻿<div class="input-group" *ngFor="let person of people" style="margin-top: 10px;">
+    <input [(ngModel)]="person.name" class="form-control" />
+    <div class="input-group-btn">
+        <button class="btn btn-warning" (click)="editPerson(person)">Edit</button>
+        <button class="btn btn-danger" (click)="deletePerson(person)">Delete</button>
+    </div>
+</div>
