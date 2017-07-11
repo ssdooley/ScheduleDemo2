@@ -1,0 +1,67 @@
+﻿import { Component, OnInit } from '@angular/core';
+import { CommitmentService } from '../../services/commitment.service';
+import { PersonService } from '../../services/person.service';
+import { Person } from '../../models/person.model';
+import { Commitment } from '../../models/commitment.model';
+
+@Component({
+    selector: 'commitments',
+    templateUrl: './commitments.component.html',
+    providers: [
+        CommitmentService,
+        PersonService
+    ]
+})
+export class CommitmentsComponent implements OnInit {
+    commitments: Array<Commitment> = new Array<Commitment>();
+    people: Array<Person> = new Array<Person>();
+    person: Person;
+    commitment: Commitment = new Commitment();
+    isPersonal: boolean = false;
+
+    constructor(private commitmentService: CommitmentService, private personService: PersonService) {
+        commitmentService.commitments.subscribe(commitments => {
+            this.commitments = commitments;
+        });
+
+        personService.people.subscribe(people => {
+            this.people = people;
+        });
+
+        this.people = new Array<Person>();
+    }
+
+    ngOnInit() {
+        this.commitmentService.getCommitments();
+        this.personService.getPeople();
+    };
+
+    addSelectedPerson() {
+        let index = this.people.indexOf(this.person);
+
+        if (index < 0) {
+            this.people.push(this.person);
+        }
+    }
+
+    removePerson(person: Person) {
+        let index = this.people.indexOf(person);
+        this.people.splice(index, 1);
+    }
+
+    updatePerson(person: Person) {
+        this.person.id = person.id;
+        this.person.name = person.name;
+    }
+
+    retrievePersonalCommitments() {
+        this.isPersonal = true;
+        this.commitmentService.getPersonalCommitments(this.person.id);
+    }
+
+    clearPersonalCommitments() {
+        this.isPersonal = false;
+        this.person = new Person();
+        this.commitmentService.getCommitments();
+    }
+}
