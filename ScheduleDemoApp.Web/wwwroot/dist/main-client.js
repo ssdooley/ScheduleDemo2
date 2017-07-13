@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "11e5c7f89e6510c58094"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "95e6bc925e1365a2edc9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -631,7 +631,9 @@
 /******/ 		}
 /******/ 	
 /******/ 		hotSetStatus("idle");
-/******/ 		return Promise.resolve(outdatedModules);
+/******/ 		return new Promise(function(resolve) {
+/******/ 			resolve(outdatedModules);
+/******/ 		});
 /******/ 	}
 /******/
 /******/ 	// The module cache
@@ -2256,22 +2258,22 @@ var CommitmentsComponent = (function () {
         personService.people.subscribe(function (people) {
             _this.people = people;
         });
-        this.people = new Array();
+        this.commitment.people = new Array();
     }
     CommitmentsComponent.prototype.ngOnInit = function () {
-        this.commitmentService.getCommitments();
+        //this.commitmentService.getCommitments();
         this.personService.getPeople();
     };
     ;
     CommitmentsComponent.prototype.addSelectedPerson = function () {
-        var index = this.people.indexOf(this.person);
+        var index = this.commitment.people.indexOf(this.person);
         if (index < 0) {
-            this.people.push(this.person);
+            this.commitment.people.push(this.person);
         }
     };
     CommitmentsComponent.prototype.removePerson = function (person) {
-        var index = this.people.indexOf(person);
-        this.people.splice(index, 1);
+        var index = this.commitment.people.indexOf(person);
+        this.commitment.people.splice(index, 1);
     };
     CommitmentsComponent.prototype.updatePerson = function (person) {
         this.person.id = person.id;
@@ -2896,7 +2898,7 @@ module.exports = "<nav class=\"navbar navbar-inverse navbar-fixed-top\">\r\n    
 /* 46 */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Commitments</h2>\r\n<hr />\r\n\r\n<div *ngIf=\"people\">\r\n    <div class=\"input-group\">\r\n        <div class=\"input-group-addon\">Personal Commitments</div>\r\n        <select class=\"form-control\" [(ngModel)]=\"person\">\r\n            <option *ngFor=\"let person of people\" [ngValue]=\"person\">{{person.name}}</option>\r\n        </select>\r\n        <div class=\"input-group-btn\">\r\n            <button class=\"btn btn-primary\" (click)=\"addSelectedPerson()\">Add</button>\r\n            <button class=\"btn btn-success\" (click)=\"retrievePersonalCommitments()\">Retrieve</button>\r\n            <button class=\"btn btn-warning\" (click)=\"clearPersonalCommitments()\">Clear</button>\r\n        </div>\r\n    </div>\r\n    <hr />\r\n</div>\r\n<div *ngIf=\"commitment\">\r\n    <div *ngIf=\"commitment.people\">\r\n        <table class=\"table table-striped\">\r\n            <tbody>\r\n                <tr *ngFor=\"let person of commitment.people\">\r\n                    <td>{{person.name}}</td>\r\n                    <td>\r\n                        <button class=\"btn btn-danger btn-xs\" (click)=\"removePerson(person)\">Remove</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"isPersonal\">\r\n    <h3>Personal Commitments for {{person.name}}</h3>\r\n    <hr />\r\n</div>\r\n<div *ngIf=\"commitments\">\r\n    <div *ngFor=\"let commitment of commitments\">\r\n        <h3>Subject: {{commitment.subject}}</h3>\r\n        <hr />\r\n        <p>Id: {{commitment.id}}</p>\r\n        <p>Location: {{commitment.location}}</p>\r\n        <p>Body: {{commitment.body}}</p>\r\n        <p>Start Date: {{commitment.startDate}}</p>\r\n        <p>End Date: {{commitment.endDate}}</p>\r\n        <p>Category: {{commitment.category.name}}</p>\r\n        <div *ngIf=\"commitment.people\">\r\n            <h3>People</h3>\r\n            <hr />\r\n            <p *ngFor=\"let person of commitment.people\">{{person.name}}</p>\r\n        </div>\r\n        <div *ngIf=\"!commitment.people\">\r\n            <h3>No People Found!</h3>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"!commitments\">\r\n    <h3>No Commitments Found!</h3>\r\n</div>\r\n";
+module.exports = "<h2>Commitments</h2>\r\n<hr />\r\n\r\n<div *ngIf=\"people\">\r\n    <div class=\"input-group\">\r\n        <div class=\"input-group-addon\">Personal Commitments</div>\r\n        <select class=\"form-control\" [(ngModel)]=\"person\">\r\n            <option *ngFor=\"let person of people\" [ngValue]=\"person\">{{person.name}}</option>\r\n        </select>\r\n        <div class=\"input-group-btn\">\r\n            <button class=\"btn btn-primary\" (click)=\"addSelectedPerson()\">Add</button>\r\n            <button class=\"btn btn-success\" (click)=\"retrievePersonalCommitments()\">Retrieve</button>\r\n            <button class=\"btn btn-warning\" (click)=\"clearPersonalCommitments()\">Clear</button>\r\n        </div>\r\n    </div>\r\n    <hr />\r\n</div>\r\n<div *ngIf=\"commitment\">\r\n    <div *ngIf=\"commitment.people\">\r\n        <table class=\"table table-striped\">\r\n            <tbody>\r\n                <tr *ngFor=\"let person of commitment.people\">\r\n                    <td>{{person.name}}</td>\r\n                    <td>\r\n                        <button class=\"btn btn-danger btn-xs\" (click)=\"removePerson(person)\">Remove</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"isPersonal\">\r\n    <h3>Personal Commitments for {{person.name}}</h3>\r\n    <hr />\r\n</div>\r\n<div *ngIf=\"commitments && isPersonal\">\r\n    <div *ngFor=\"let commitment of commitments\">\r\n        <h3>Subject: {{commitment.subject}}</h3>\r\n        <hr />\r\n        <p>Id: {{commitment.id}}</p>\r\n        <p>Location: {{commitment.location}}</p>\r\n        <p>Body: {{commitment.body}}</p>\r\n        <p>Start Date: {{commitment.startDate}}</p>\r\n        <p>End Date: {{commitment.endDate}}</p>\r\n        <p>Category: {{commitment.category.name}}</p>\r\n        <div *ngIf=\"commitment.people\">\r\n            <h3>People</h3>\r\n            <hr />\r\n            <p *ngFor=\"let person of commitment.people\">{{person.name}}</p>\r\n        </div>\r\n        <div *ngIf=\"!commitment.people\">\r\n            <h3>No People Found!</h3>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"!commitments\">\r\n    <h3>No Commitments Found!</h3>\r\n</div>\r\n";
 
 /***/ }),
 /* 47 */

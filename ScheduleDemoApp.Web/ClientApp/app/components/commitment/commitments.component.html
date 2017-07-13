@@ -33,7 +33,7 @@
     <h3>Personal Commitments for {{person.name}}</h3>
     <hr />
 </div>
-<div *ngIf="commitments">
+<div *ngIf="commitments && isPersonal">
     <div *ngFor="let commitment of commitments">
         <h3>Subject: {{commitment.subject}}</h3>
         <hr />

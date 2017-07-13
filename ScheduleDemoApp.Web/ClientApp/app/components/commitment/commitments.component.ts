@@ -28,25 +28,25 @@ export class CommitmentsComponent implements OnInit {
             this.people = people;
         });
 
-        this.people = new Array<Person>();
+        this.commitment.people = new Array<Person>();
     }
 
     ngOnInit() {
-        this.commitmentService.getCommitments();
+        //this.commitmentService.getCommitments();
         this.personService.getPeople();
     };
 
     addSelectedPerson() {
-        let index = this.people.indexOf(this.person);
+        let index = this.commitment.people.indexOf(this.person);
 
         if (index < 0) {
-            this.people.push(this.person);
+            this.commitment.people.push(this.person);
         }
     }
 
     removePerson(person: Person) {
-        let index = this.people.indexOf(person);
-        this.people.splice(index, 1);
+        let index = this.commitment.people.indexOf(person);
+        this.commitment.people.splice(index, 1);
     }
 
     updatePerson(person: Person) {
