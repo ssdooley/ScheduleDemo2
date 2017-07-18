@@ -1,0 +1,5 @@
+﻿<h3>Committed People</h3>
+<div *ngFor="let person of people">
+    <p>{{person.name}}</p>
+    <button (click)="deleteCommitmentPerson(person)">Delete</button>
+</div>

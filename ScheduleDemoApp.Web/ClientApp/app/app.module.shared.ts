@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ToastrService } from './services/toastr.service';
 
-import { AppComponent } from './components/app/app.component'
+import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { PeopleComponent } from './components/admin/people.component';
@@ -14,6 +14,11 @@ import { PersonListComponent } from './components/admin/person-list.component';
 import { AddCategoryComponent } from './components/admin/add-category.component';
 import { CategoryListComponent } from './components/admin/category-list.component';
 import { CommitmentsComponent } from './components/commitment/commitments.component';
+import { UpdateCommitmentComponent } from './components/commitment/update-commitment.component';
+import { AddCommitmentComponent } from './components/commitment/add-commitment.component';
+import { AddCommitmentPersonComponent } from './components/commitment/add-commitment-person.component';
+import { DeleteCommitmentComponent } from './components/commitment/delete-commitment.component';
+import { ManageCommitmentPersonComponent } from './components/commitment/manage-commitment-person.component';
 
 
 export const sharedConfig: NgModule = {
@@ -28,7 +33,12 @@ export const sharedConfig: NgModule = {
         PersonListComponent,
         AddCategoryComponent,
         CategoryListComponent,
-        CommitmentsComponent
+        CommitmentsComponent,
+        UpdateCommitmentComponent,
+        AddCommitmentComponent,
+        AddCommitmentPersonComponent,
+        DeleteCommitmentComponent,
+        ManageCommitmentPersonComponent,
     ],
     providers: [
         ToastrService
@@ -38,6 +48,7 @@ export const sharedConfig: NgModule = {
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
+            { path: 'update-commitment', component: UpdateCommitmentComponent },
             {
                 path: 'admin',
                 component: AdminComponent,

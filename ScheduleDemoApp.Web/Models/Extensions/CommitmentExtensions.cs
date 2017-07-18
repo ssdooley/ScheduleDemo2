@@ -56,7 +56,7 @@ namespace ScheduleDemoApp.Models.Extensions
         {
             var commitmentIds = await db.CommitmentPeople.Where(x => x.PersonId == id).Select(x => x.CommitmentId).Distinct().ToListAsync();
 
-            var model = db.Commitments.Include(x => x.CommitmentPeople)
+            var model = db.Commitments.Include("CommitmentPeople.Person")
                 .Include(x => x.Category)
                 .Where(x => commitmentIds.Contains(x.Id))
                 .Select(x => x.CastToCommitmentModel()).OrderBy(x => x.startDate).AsEnumerable();
