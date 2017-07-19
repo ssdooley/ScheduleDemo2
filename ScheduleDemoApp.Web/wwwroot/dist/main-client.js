@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ed13ac8508a7e1f5349b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "89e89004d810c8f496b6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(77)(__webpack_require__.s = 77);
+/******/ 	return hotCreateRequire(78)(__webpack_require__.s = 78);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1057,7 +1057,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var toastr = __webpack_require__(72);
+var toastr = __webpack_require__(73);
 var ToastrService = (function () {
     function ToastrService() {
         toastr.options = {
@@ -1255,7 +1255,7 @@ exports.CategoryService = CategoryService;
 "use strict";
 
 var Observable_1 = __webpack_require__(4);
-var catch_1 = __webpack_require__(76);
+var catch_1 = __webpack_require__(77);
 Observable_1.Observable.prototype.catch = catch_1._catch;
 Observable_1.Observable.prototype._catch = catch_1._catch;
 //# sourceMappingURL=catch.js.map
@@ -1267,7 +1267,7 @@ Observable_1.Observable.prototype._catch = catch_1._catch;
 "use strict";
 
 var Observable_1 = __webpack_require__(4);
-var map_1 = __webpack_require__(69);
+var map_1 = __webpack_require__(70);
 Observable_1.Observable.prototype.map = map_1.map;
 //# sourceMappingURL=map.js.map
 
@@ -1502,9 +1502,9 @@ module.exports = (__webpack_require__(1))(37);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(62);
-__webpack_require__(73);
+__webpack_require__(74);
 var core_1 = __webpack_require__(0);
-var platform_browser_dynamic_1 = __webpack_require__(70);
+var platform_browser_dynamic_1 = __webpack_require__(71);
 var app_module_client_1 = __webpack_require__(21);
 if (true) {
     module['hot'].accept();
@@ -1999,7 +1999,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
-var platform_browser_1 = __webpack_require__(74);
+var platform_browser_1 = __webpack_require__(75);
 var forms_1 = __webpack_require__(15);
 var http_1 = __webpack_require__(7);
 var app_module_shared_1 = __webpack_require__(22);
@@ -2032,7 +2032,7 @@ exports.AppModule = AppModule;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var router_1 = __webpack_require__(71);
+var router_1 = __webpack_require__(72);
 var forms_1 = __webpack_require__(15);
 var toastr_service_1 = __webpack_require__(6);
 var app_component_1 = __webpack_require__(30);
@@ -2045,7 +2045,7 @@ var person_list_component_1 = __webpack_require__(29);
 var add_category_component_1 = __webpack_require__(23);
 var category_list_component_1 = __webpack_require__(27);
 var commitments_component_1 = __webpack_require__(33);
-var update_commitment_component_1 = __webpack_require__(36);
+var update_commitment_modal_component_1 = __webpack_require__(36);
 var add_commitment_component_1 = __webpack_require__(32);
 var add_commitment_person_component_1 = __webpack_require__(31);
 var delete_commitment_component_1 = __webpack_require__(34);
@@ -2063,7 +2063,7 @@ exports.sharedConfig = {
         add_category_component_1.AddCategoryComponent,
         category_list_component_1.CategoryListComponent,
         commitments_component_1.CommitmentsComponent,
-        update_commitment_component_1.UpdateCommitmentComponent,
+        update_commitment_modal_component_1.UpdateCommitmentModalComponent,
         add_commitment_component_1.AddCommitmentComponent,
         add_commitment_person_component_1.AddCommitmentPersonComponent,
         delete_commitment_component_1.DeleteCommitmentComponent,
@@ -2077,7 +2077,7 @@ exports.sharedConfig = {
         router_1.RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: home_component_1.HomeComponent },
-            { path: 'update-commitment', component: update_commitment_component_1.UpdateCommitmentComponent },
+            { path: 'update-commitment', component: update_commitment_modal_component_1.UpdateCommitmentModalComponent },
             {
                 path: 'admin',
                 component: admin_component_1.AdminComponent,
@@ -2535,6 +2535,7 @@ var commitment_service_1 = __webpack_require__(2);
 var person_service_1 = __webpack_require__(3);
 var person_model_1 = __webpack_require__(8);
 var commitment_model_1 = __webpack_require__(5);
+var $ = __webpack_require__(68);
 var CommitmentsComponent = (function () {
     function CommitmentsComponent(commitmentService, personService) {
         var _this = this;
@@ -2566,6 +2567,17 @@ var CommitmentsComponent = (function () {
     CommitmentsComponent.prototype.removePerson = function (person) {
         var index = this.commitment.people.indexOf(person);
         this.commitment.people.splice(index, 1);
+    };
+    CommitmentsComponent.prototype.updateCommitmentModal = function (commitment) {
+        if (commitment.id) {
+            var context_1 = this;
+            $('#update-commitment-modal').modal({
+                closable: false,
+                onApprove: function () {
+                    context_1.commitmentService.updateCommitment(this.commitment);
+                }
+            }).modal('show');
+        }
     };
     CommitmentsComponent.prototype.updatePerson = function (person) {
         this.person.id = person.id;
@@ -2704,8 +2716,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var commitment_model_1 = __webpack_require__(5);
 var commitment_service_1 = __webpack_require__(2);
-var UpdateCommitmentComponent = (function () {
-    function UpdateCommitmentComponent(commitmentService) {
+var UpdateCommitmentModalComponent = (function () {
+    function UpdateCommitmentModalComponent(commitmentService) {
         var _this = this;
         this.commitmentService = commitmentService;
         this.commitment = new commitment_model_1.Commitment();
@@ -2713,19 +2725,23 @@ var UpdateCommitmentComponent = (function () {
             _this.commitment = commitment;
         });
     }
-    UpdateCommitmentComponent.prototype.editCommitment = function () {
+    UpdateCommitmentModalComponent.prototype.editCommitment = function () {
         this.commitmentService.updateCommitment(this.commitment);
     };
-    return UpdateCommitmentComponent;
+    return UpdateCommitmentModalComponent;
 }());
-UpdateCommitmentComponent = __decorate([
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], UpdateCommitmentModalComponent.prototype, "modalID", void 0);
+UpdateCommitmentModalComponent = __decorate([
     core_1.Component({
-        selector: 'update-commitment',
+        selector: 'update-commitment-modal',
         template: __webpack_require__(57)
     }),
     __metadata("design:paramtypes", [commitment_service_1.CommitmentService])
-], UpdateCommitmentComponent);
-exports.UpdateCommitmentComponent = UpdateCommitmentComponent;
+], UpdateCommitmentModalComponent);
+exports.UpdateCommitmentModalComponent = UpdateCommitmentModalComponent;
 
 
 /***/ }),
@@ -3257,7 +3273,7 @@ module.exports = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"utf
 /* 54 */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Commitments</h2>\r\n<hr />\r\n\r\n<div *ngIf=\"people\">\r\n    <div class=\"input-group\">\r\n        <div class=\"input-group-addon\">Personal Commitments</div>\r\n        <select class=\"form-control\" [(ngModel)]=\"person\">\r\n            <option *ngFor=\"let person of people\" [ngValue]=\"person\">{{person.name}}</option>\r\n        </select>\r\n        <div class=\"input-group-btn\">\r\n            <button class=\"btn btn-primary\" (click)=\"addSelectedPerson()\">Add</button>\r\n            <button class=\"btn btn-success\" (click)=\"retrievePersonalCommitments()\">Retrieve</button>\r\n            <button class=\"btn btn-warning\" (click)=\"clearPersonalCommitments()\">Clear</button>\r\n        </div>\r\n    </div>\r\n    <hr />\r\n</div>\r\n<div *ngIf=\"commitment\">\r\n    <div *ngIf=\"commitment.people\">\r\n        <table class=\"table table-striped\">\r\n            <tbody>\r\n                <tr *ngFor=\"let person of commitment.people\">\r\n                    <td>{{person.name}}</td>\r\n                    <td>\r\n                        <button class=\"btn btn-danger btn-xs\" (click)=\"removePerson(person)\">Remove</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"isPersonal\">\r\n    <h3>Personal Commitments for {{person.name}}</h3>\r\n    <hr />\r\n</div>\r\n<div *ngIf=\"commitments && isPersonal\">\r\n    <div *ngFor=\"let commitment of commitments\">\r\n        <h3>Subject: {{commitment.subject}}</h3>\r\n        <hr />\r\n        <p>Id: {{commitment.id}}</p>\r\n        <p>Location: {{commitment.location}}</p>\r\n        <p>Body: {{commitment.body}}</p>\r\n        <p>Start Date: {{commitment.startDate}}</p>\r\n        <p>End Date: {{commitment.endDate}}</p>\r\n        <p>Category: {{commitment.category.name}}</p>\r\n        <div *ngIf=\"commitment.people\">\r\n            <h3>People</h3>\r\n            <hr />\r\n            <p *ngFor=\"let person of commitment.people\">{{person.name}}</p>\r\n        </div>\r\n        <div *ngIf=\"!commitment.people\">\r\n            <h3>No People Found!</h3>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div *ngIf=\"!commitments\">\r\n    <h3>No Commitments Found!</h3>\r\n</div>\r\n";
+module.exports = "    <h2>Commitments</h2>\r\n    <hr />\r\n\r\n    <div *ngIf=\"people\">\r\n        <div class=\"input-group\">\r\n            <div class=\"input-group-addon\">Personal Commitments</div>\r\n            <select class=\"form-control\" [(ngModel)]=\"person\">\r\n                <option *ngFor=\"let person of people\" [ngValue]=\"person\">{{person.name}}</option>\r\n            </select>\r\n            <div class=\"input-group-btn\">\r\n                <button class=\"btn btn-primary\" (click)=\"addSelectedPerson()\">Add</button>\r\n                <button class=\"btn btn-success\" (click)=\"retrievePersonalCommitments()\">Retrieve</button>\r\n                <button class=\"btn btn-warning\" (click)=\"clearPersonalCommitments()\">Clear</button>\r\n            </div>\r\n        </div>\r\n        <hr />\r\n    </div>\r\n    <div *ngIf=\"commitment\">\r\n        <div *ngIf=\"commitment.people\">\r\n            <table class=\"table table-striped\">\r\n                <tbody>\r\n                    <tr *ngFor=\"let person of commitment.people\">\r\n                        <td>{{person.name}}</td>\r\n                        <td>\r\n                            <button class=\"btn btn-danger btn-xs\" (click)=\"removePerson(person)\">Remove</button>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"isPersonal\">\r\n        <h3>Personal Commitments for {{person.name}}</h3>\r\n        <hr />\r\n    </div>\r\n    <div *ngIf=\"commitments && isPersonal\">\r\n        <div *ngFor=\"let commitment of commitments\">\r\n            <h3>Subject: {{commitment.subject}}</h3>\r\n            <hr />\r\n            <div class=\"panel panel-default\">\r\n                <div class=\"panel-heading\">Schedule</div>\r\n                <div class=\"panel-body\">\r\n                    <table class=\"table\">\r\n                        <tr>\r\n                            <th>Id</th>\r\n                            <th>Location</th>\r\n                            <th>Body</th>\r\n                            <th>Start Date</th>\r\n                            <th>End Date</th>\r\n                            <th>Category</th>\r\n                            <th colspan=\"2\">Configure</th>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>{{commitment.id}}</td>\r\n                            <td>{{commitment.location}}</td>\r\n                            <td>{{commitment.body}}</td>\r\n                            <td>{{commitment.startDate}}</td>\r\n                            <td>{{commitment.endDate}}</td>\r\n                            <td>{{commitment.category.name}}</td>\r\n                            <td>\r\n                                <!----<div [ngClass]=\"commitment.id\">{{commitment.id}}></div>-->\r\n                                \r\n                            <button type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#updateCommitment\">Edit</button>\r\n                            </td>\r\n                        </tr>\r\n                    </table>\r\n                </div>\r\n            </div>\r\n\r\n            <div *ngIf=\"commitment.people\">\r\n                <h3>People</h3>\r\n                <hr />\r\n                <p *ngFor=\"let person of commitment.people\">{{person.name}}</p>\r\n            </div>\r\n\r\n            <div *ngIf=\"!commitment.people\">\r\n                <h3>No People Found!</h3>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"!commitments\">\r\n        <h3>No Commitments Found!</h3>\r\n    </div>\r\n";
 
 /***/ }),
 /* 55 */
@@ -3275,7 +3291,7 @@ module.exports = "<h3>Committed People</h3>\r\n<div *ngFor=\"let person of peopl
 /* 57 */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Update Commitments</h2>\r\n<manage-commitment-person [commitmentId]=\"commitment.id\" [people]=\"commitment.people\"></manage-commitment-person>";
+module.exports = "<div class=\"modal fade\" id=\"updateCommitment\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"update-commitment-modal\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title\" id=\"update-commitment-modal\">Modal title</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                ...\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\r\n                <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!--<manage-commitment-person [commitmentId]=\"commitment.id\" [people]=\"commitment.people\"></manage-commitment-person>-->";
 
 /***/ }),
 /* 58 */
@@ -4606,7 +4622,7 @@ var Reflect;
             Function("return this;")());
 })(Reflect || (Reflect = {}));
 //# sourceMappingURL=Reflect.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(68), __webpack_require__(75)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(69), __webpack_require__(76)))
 
 /***/ }),
 /* 63 */
@@ -4890,58 +4906,64 @@ module.exports = function(module) {
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(12);
+module.exports = (__webpack_require__(1))(1);
 
 /***/ }),
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(27);
+module.exports = (__webpack_require__(1))(12);
 
 /***/ }),
 /* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(39);
+module.exports = (__webpack_require__(1))(27);
 
 /***/ }),
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(40);
+module.exports = (__webpack_require__(1))(39);
 
 /***/ }),
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(48);
+module.exports = (__webpack_require__(1))(40);
 
 /***/ }),
 /* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(49);
+module.exports = (__webpack_require__(1))(48);
 
 /***/ }),
 /* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(5);
+module.exports = (__webpack_require__(1))(49);
 
 /***/ }),
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(7);
+module.exports = (__webpack_require__(1))(5);
 
 /***/ }),
 /* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(1))(75);
+module.exports = (__webpack_require__(1))(7);
 
 /***/ }),
 /* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(1))(75);
+
+/***/ }),
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(18);

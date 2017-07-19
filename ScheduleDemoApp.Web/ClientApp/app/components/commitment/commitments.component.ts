@@ -3,6 +3,7 @@ import { CommitmentService } from '../../services/commitment.service';
 import { PersonService } from '../../services/person.service';
 import { Person } from '../../models/person.model';
 import { Commitment } from '../../models/commitment.model';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'commitments',
@@ -47,6 +48,19 @@ export class CommitmentsComponent implements OnInit {
     removePerson(person: Person) {
         let index = this.commitment.people.indexOf(person);
         this.commitment.people.splice(index, 1);
+    }
+
+    updateCommitmentModal(commitment: Commitment) {
+        if (commitment.id) {
+            let context = this;
+
+            $('#update-commitment-modal').modal({
+                closable: false,
+                onApprove: function () {
+                    context.commitmentService.updateCommitment(this.commitment);
+                }
+            }).modal('show');
+        }
     }
 
     updatePerson(person: Person) {

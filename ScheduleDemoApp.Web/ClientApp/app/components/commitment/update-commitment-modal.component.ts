@@ -1,13 +1,14 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component,Input } from '@angular/core';
 import { Commitment } from '../../models/commitment.model';
 import { CommitmentService } from '../../services/commitment.service';
 
 @Component({
-    selector: 'update-commitment',
-    templateUrl: './update-commitment.component.html'
+    selector: 'update-commitment-modal',
+    templateUrl: './update-commitment-modal.component.html'
 })
 
-export class UpdateCommitmentComponent {
+export class UpdateCommitmentModalComponent {
+    @Input() modalID: string;
     commitment: Commitment = new Commitment();
 
     constructor(private commitmentService: CommitmentService) {

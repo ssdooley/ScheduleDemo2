@@ -14,7 +14,7 @@ import { PersonListComponent } from './components/admin/person-list.component';
 import { AddCategoryComponent } from './components/admin/add-category.component';
 import { CategoryListComponent } from './components/admin/category-list.component';
 import { CommitmentsComponent } from './components/commitment/commitments.component';
-import { UpdateCommitmentComponent } from './components/commitment/update-commitment.component';
+import { UpdateCommitmentModalComponent } from './components/commitment/update-commitment-modal.component';
 import { AddCommitmentComponent } from './components/commitment/add-commitment.component';
 import { AddCommitmentPersonComponent } from './components/commitment/add-commitment-person.component';
 import { DeleteCommitmentComponent } from './components/commitment/delete-commitment.component';
@@ -34,7 +34,7 @@ export const sharedConfig: NgModule = {
         AddCategoryComponent,
         CategoryListComponent,
         CommitmentsComponent,
-        UpdateCommitmentComponent,
+        UpdateCommitmentModalComponent,
         AddCommitmentComponent,
         AddCommitmentPersonComponent,
         DeleteCommitmentComponent,
@@ -48,7 +48,7 @@ export const sharedConfig: NgModule = {
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'update-commitment', component: UpdateCommitmentComponent },
+            { path: 'update-commitment', component: UpdateCommitmentModalComponent },
             {
                 path: 'admin',
                 component: AdminComponent,

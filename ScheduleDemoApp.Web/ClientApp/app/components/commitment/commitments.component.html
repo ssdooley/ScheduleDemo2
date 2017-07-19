@@ -1,58 +1,83 @@
-﻿<h2>Commitments</h2>
-<hr />
+﻿    <h2>Commitments</h2>
+    <hr />
 
-<div *ngIf="people">
-    <div class="input-group">
-        <div class="input-group-addon">Personal Commitments</div>
-        <select class="form-control" [(ngModel)]="person">
-            <option *ngFor="let person of people" [ngValue]="person">{{person.name}}</option>
-        </select>
-        <div class="input-group-btn">
-            <button class="btn btn-primary" (click)="addSelectedPerson()">Add</button>
-            <button class="btn btn-success" (click)="retrievePersonalCommitments()">Retrieve</button>
-            <button class="btn btn-warning" (click)="clearPersonalCommitments()">Clear</button>
+    <div *ngIf="people">
+        <div class="input-group">
+            <div class="input-group-addon">Personal Commitments</div>
+            <select class="form-control" [(ngModel)]="person">
+                <option *ngFor="let person of people" [ngValue]="person">{{person.name}}</option>
+            </select>
+            <div class="input-group-btn">
+                <button class="btn btn-primary" (click)="addSelectedPerson()">Add</button>
+                <button class="btn btn-success" (click)="retrievePersonalCommitments()">Retrieve</button>
+                <button class="btn btn-warning" (click)="clearPersonalCommitments()">Clear</button>
+            </div>
         </div>
-    </div>
-    <hr />
-</div>
-<div *ngIf="commitment">
-    <div *ngIf="commitment.people">
-        <table class="table table-striped">
-            <tbody>
-                <tr *ngFor="let person of commitment.people">
-                    <td>{{person.name}}</td>
-                    <td>
-                        <button class="btn btn-danger btn-xs" (click)="removePerson(person)">Remove</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div *ngIf="isPersonal">
-    <h3>Personal Commitments for {{person.name}}</h3>
-    <hr />
-</div>
-<div *ngIf="commitments && isPersonal">
-    <div *ngFor="let commitment of commitments">
-        <h3>Subject: {{commitment.subject}}</h3>
         <hr />
-        <p>Id: {{commitment.id}}</p>
-        <p>Location: {{commitment.location}}</p>
-        <p>Body: {{commitment.body}}</p>
-        <p>Start Date: {{commitment.startDate}}</p>
-        <p>End Date: {{commitment.endDate}}</p>
-        <p>Category: {{commitment.category.name}}</p>
+    </div>
+    <div *ngIf="commitment">
         <div *ngIf="commitment.people">
-            <h3>People</h3>
-            <hr />
-            <p *ngFor="let person of commitment.people">{{person.name}}</p>
-        </div>
-        <div *ngIf="!commitment.people">
-            <h3>No People Found!</h3>
+            <table class="table table-striped">
+                <tbody>
+                    <tr *ngFor="let person of commitment.people">
+                        <td>{{person.name}}</td>
+                        <td>
+                            <button class="btn btn-danger btn-xs" (click)="removePerson(person)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
-<div *ngIf="!commitments">
-    <h3>No Commitments Found!</h3>
-</div>
+    <div *ngIf="isPersonal">
+        <h3>Personal Commitments for {{person.name}}</h3>
+        <hr />
+    </div>
+    <div *ngIf="commitments && isPersonal">
+        <div *ngFor="let commitment of commitments">
+            <h3>Subject: {{commitment.subject}}</h3>
+            <hr />
+            <div class="panel panel-default">
+                <div class="panel-heading">Schedule</div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>Id</th>
+                            <th>Location</th>
+                            <th>Body</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Category</th>
+                            <th colspan="2">Configure</th>
+                        </tr>
+                        <tr>
+                            <td>{{commitment.id}}</td>
+                            <td>{{commitment.location}}</td>
+                            <td>{{commitment.body}}</td>
+                            <td>{{commitment.startDate}}</td>
+                            <td>{{commitment.endDate}}</td>
+                            <td>{{commitment.category.name}}</td>
+                            <td>
+                                <!----<div [ngClass]="commitment.id">{{commitment.id}}></div>-->
+                                
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#updateCommitment">Edit</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div *ngIf="commitment.people">
+                <h3>People</h3>
+                <hr />
+                <p *ngFor="let person of commitment.people">{{person.name}}</p>
+            </div>
+
+            <div *ngIf="!commitment.people">
+                <h3>No People Found!</h3>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!commitments">
+        <h3>No Commitments Found!</h3>
+    </div>
