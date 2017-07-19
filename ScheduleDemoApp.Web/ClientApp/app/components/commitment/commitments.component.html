@@ -58,9 +58,7 @@
                             <td>{{commitment.endDate}}</td>
                             <td>{{commitment.category.name}}</td>
                             <td>
-                                <!----<div [ngClass]="commitment.id">{{commitment.id}}></div>-->
-                                
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#updateCommitment">Edit</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#updateCommitment" (click)="update-commitment-modal">Edit</button>
                             </td>
                         </tr>
                     </table>
